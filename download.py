@@ -32,10 +32,7 @@ def downloadVideo():
     
 
     select.download(Folder_Name)
-    if PytubeError:
-        linkError.config(text="Download was not successfull", fg="red")
-    else:
-        linkError.config(text="Downlad Complete!")
+    linkError.config(text="Downlad Complete!")
     
 
 # ? Step 1, define the window
@@ -73,3 +70,4 @@ saveButton.pack(side = TOP, ipadx = 20, ipady =6)
 window.mainloop()
 
 # ? After creating the set up file, run python setup.py build to build the project.
+
