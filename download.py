@@ -1,4 +1,4 @@
-from pytube import YouTube
+from pytube import YouTube, exceptions
 from tkinter import *
 from tkinter import ttk
 from tkinter import filedialog
@@ -19,20 +19,26 @@ def downloadVideo():
 
     if (len(url) > 1 ):
         linkError.config(text="")
-        yt = YouTube(url)
+        try: 
+            yt = YouTube(url)
+            linkError.config(text='Valid link. Download will begin shortly.', fg='red' )
+            if (choice == choices[0]):
+                select = yt.streams.filter(progressive=True).first()
+            elif (choice == choices[1]):
+                select = yt.streams.filter(progressive=True, file_extension="mp4").last()
+            elif (choice == choices[2]):
+                select = yt.streams.filter(only_audio=TRUE).first()
+        except exceptions.RegexMatchError:
+            linkError.config(text='Invalid link. Download stopped.', fg='red' )
 
-        if (choice == choices[0]):
-            select = yt.streams.filter(progressive=True).first()
-        elif (choice == choices[1]):
-            select = yt.streams.filter(progressive=True, file_extension="mp4").last()
-        elif (choice == choices[2]):
-            select = yt.streams.filter(only_audio=TRUE).first()
     else:
         linkError.config(text="Please input link", fg="blue")
     
-
-    select.download(Folder_Name)
-    linkError.config(text="Downlad Complete!")
+    try: 
+        select.download(Folder_Name)
+        linkError.config(text="Downlad Complete!", fg="green")
+    except UnboundLocalError:
+        linkError.config(text='Invalid link. Download stopped.', fg='red' )
     
 
 # ? Step 1, define the window
@@ -68,6 +74,7 @@ saveButton = ttk.Button(window, text="Save File", command=downloadVideo)
 saveButton.pack(side = TOP, ipadx = 20, ipady =6)
 
 window.mainloop()
+
 
 # ? After creating the set up file, run python setup.py build to build the project.
 
