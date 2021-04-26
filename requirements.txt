@@ -1,0 +1,12 @@
+altgraph==0.17
+cx-Freeze==6.6
+cx-Logging==3.0
+future==0.18.2
+importlib-metadata==4.0.1
+pefile==2019.4.18
+pyinstaller==4.3
+pyinstaller-hooks-contrib==2021.1
+pytube==10.7.2
+pywin32-ctypes==0.2.0
+typing-extensions==3.7.4.3
+zipp==3.4.1

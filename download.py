@@ -3,6 +3,7 @@ from tkinter import *
 from tkinter import ttk
 from tkinter import filedialog
 
+
 Folder_Name = ""
 
 def openLocation():
